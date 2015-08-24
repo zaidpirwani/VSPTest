@@ -93,6 +93,9 @@ namespace EjaadTech.VSPTest
                 CommandID toolwndCommandID = new CommandID(GuidList.guidVSPTestCmdSet, (int)PkgCmdIDList.testToolWindow);
                 MenuCommand menuToolWin = new MenuCommand(ShowToolWindow, toolwndCommandID);
                 mcs.AddCommand( menuToolWin );
+                CommandID subCommandID = new CommandID(GuidList.guidVSPTestCmdSet, (int)PkgCmdIDList.AoAboardsMenuCommand);
+                MenuCommand subItem = new MenuCommand(new EventHandler(SubItemCallback), subCommandID);
+                mcs.AddCommand(subItem);
                 this.InitMRUMenu(mcs);
 
             }
@@ -124,26 +127,47 @@ namespace EjaadTech.VSPTest
                        out result));
         }
 
+        private void SubItemCallback(object sender, EventArgs e)
+        {
+            IVsUIShell uiShell = (IVsUIShell)GetService(
+                typeof(SVsUIShell));
+            Guid clsid = Guid.Empty;
+            int result;
+            uiShell.ShowMessageBox(
+                   0,
+                   ref clsid,
+                   "My Top Level Menu Package",
+                   string.Format(CultureInfo.CurrentCulture,
+                   "Inside {0}.SubItemCallback()",
+                   this.ToString()),
+                   string.Empty,
+                   0,
+                   OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                   OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
+                   OLEMSGICON.OLEMSGICON_INFO,
+                   0,
+                   out result);
+        }
+
         private int numMRUItems = 4;
         private int baseMRUID = (int)PkgCmdIDList.AoAboardsMenuList;
         private ArrayList mruList;
 
-        private void InitializeMRUList()
+private void InitializeMRUList()
+{
+    if (null == this.mruList)
+    {
+        this.mruList = new ArrayList();
+        if (null != this.mruList)
         {
-            if (null == this.mruList)
+            for (int i = 0; i < this.numMRUItems; i++)
             {
-                this.mruList = new ArrayList();
-                if (null != this.mruList)
-                {
-                    for (int i = 0; i < this.numMRUItems; i++)
-                    {
-                        this.mruList.Add(string.Format(CultureInfo.CurrentCulture,
-                                                       "Item {0}", i + 1));
-                    }
-                }
+                this.mruList.Add(string.Format(CultureInfo.CurrentCulture,
+                                               "Item {0}", i + 1));
             }
         }
-
+    }
+}
         private void InitMRUMenu(OleMenuCommandService mcs)
         {
             InitializeMRUList();

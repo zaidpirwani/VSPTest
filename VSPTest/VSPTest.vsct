@@ -71,6 +71,9 @@
         <Parent guid="guidVSPTestCmdSet" id="AoAboardsMenu"/>
       </Group>
 
+      <Group guid="guidVSPTestCmdSet" id="AoAboardsMenuListGroup" priority="0x0000">
+        <Parent guid="guidVSPTestCmdSet" id="AoAboardsMenu"/>
+      </Group>
 
     </Groups>
     
@@ -95,12 +98,12 @@
         </Strings>
       </Button>
 
-      <Button guid="guidVSPTestCmdSet" id="AoAboardsMenuList" priority="0x0100" type="Button">
-        <Parent guid="guidVSPTestCmdSet" id="AoAboardsMenuGroup" />
+      <Button guid="guidVSPTestCmdSet" id="AoAboardsMenuList" type="Button" priority="0x0100">
+        <Parent guid="guidVSPTestCmdSet" id="AoAboardsMenuListGroup" />
         <CommandFlag>DynamicItemStart</CommandFlag>
         <Strings>
           <CommandName>AoAboardsMenuList</CommandName>
-          <ButtonText>Boards LIST to be here DYNAMIC</ButtonText>
+          <ButtonText>MRU Placeholder</ButtonText>
         </Strings>
       </Button>
 
@@ -146,9 +149,9 @@
 
       <IDSymbol name="AoAboardsMenu" value="0x1100"/>
       <IDSymbol name="AoAboardsMenuGroup" value="0x1150"/>
-      <IDSymbol name="AoAboardsMenuList" value="0x0105"/>
-
-
+      <IDSymbol name="AoAboardsMenuCommand" value="0x0105"/>
+      <IDSymbol name="AoAboardsMenuList" value="0x0205"/>
+      <IDSymbol name="AoAboardsMenuListGroup" value="0x1250"/>
 
     </GuidSymbol>
     

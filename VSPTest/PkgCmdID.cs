@@ -8,7 +8,9 @@ namespace EjaadTech.VSPTest
     {
         public const uint testCommand =        0x100;
         public const uint testToolWindow =    0x101;
-        public const uint AoAboardsMenuList = 0x200;
+        public const int AoAboardsMenuCommand = 0x105;
+
+        public const uint AoAboardsMenuList = 0x205;
 
     };
 }
